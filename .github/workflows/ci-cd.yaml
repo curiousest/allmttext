@@ -57,16 +57,15 @@ jobs:
         run: |
           docker push $IMAGE_NAME:$GITHUB_SHA
 
-      - name: Deploy to Cloud Run
+      - name: Deploy Cloud Run Job
         run: |
-          gcloud run deploy $SERVICE_NAME \
+          gcloud beta run jobs create $SERVICE_NAME \
             --image $IMAGE_NAME:$GITHUB_SHA \
             --region $REGION \
-            --platform managed \
-            --no-allow-unauthenticated \
-            --service-account ${{ secrets.CLOUD_RUN_SA_EMAIL }} \
             --set-secrets OPENAI_API_KEY=OPENAI_API_KEY:latest \
+            --service-account $CLOUD_RUN_SA_EMAIL \
             --quiet
+
 
 
   terraform:
