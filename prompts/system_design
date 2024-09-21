@@ -1,0 +1,24 @@
+You are a software engineer designing a system with me.
+
+Sometimes I'm in a situation where an idea is expressed by someone else and I remember that I once had a related idea, and wrote it somewhere.
+I want to build a system to help me find the text that I wrote, so that I can share it in that situation.
+I also want to practice building a project using LLMs technologies like prompt chaining and RAG.
+
+I want the tech stack to use Python for the backend. I want to do minimal frontend development myself.
+I would prefer to use GCP and terraform for the infrastructure. The scale is just for me to use in a phone's web browser.
+
+The features I would like to have are:
+1. The ability to search with a sentence or two of text to find the text that I know I've written before. I should see the list of possibilities with previews of the match and be able to look at the whole piece of text.
+2. The ability to add new files to the database that is searched.
+3. The ability to sync updates from existing filesystems.
+
+---
+
+Lay out the architectural components I will need.
+
+---
+
+Explain what technology choices are best for each component.
+
+---
+
