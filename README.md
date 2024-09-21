@@ -1,6 +1,6 @@
 # allmttext
 
-## Data sync
+## Local data sync
 
 See crontabs.
 
