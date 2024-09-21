@@ -65,7 +65,7 @@ jobs:
             --platform managed \
             --no-allow-unauthenticated \
             --service-account ${{ secrets.CLOUD_RUN_SA_EMAIL }} \
-            --set-secrets "OPENAI_API_KEY=projects/${{ secrets.GCP_PROJECT_ID }}/secrets/OPENAI_API_KEY/versions/latest" \
+            --set-secrets "OPENAI_API_KEY=projects/${{ secrets.GCP_PROJECT_ID }}/secrets/OPENAI_API_KEY:latest" \
             --quiet
 
 
