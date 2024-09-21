@@ -65,8 +65,7 @@ jobs:
             --region $REGION \
             --set-secrets OPENAI_API_KEY=OPENAI_API_KEY:latest \
             --set-secrets PINECONE_API_KEY=PINECONE_API_KEY:latest \
-            --set-env-vars GCS_BUCKET_NAME=my-pinecone-data-bucket-123,GCP_PROJECT_ID=$PROJECT_ID \
-            --set-env-vars PINECONE_ENVIRONMENT=default,PINECONE_INDEX_NAME=allmytext \
+            --set-env-vars GCS_BUCKET_NAME=my-pinecone-data-bucket-123,GCP_PROJECT_ID=$PROJECT_ID,PINECONE_ENVIRONMENT=default,PINECONE_INDEX_NAME=allmytext \
             --service-account $CLOUD_RUN_SA_EMAIL \
             --quiet
 
