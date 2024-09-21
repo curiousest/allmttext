@@ -43,6 +43,13 @@ jobs:
         run: |
           gcloud auth configure-docker
 
+      - name: Create GCR Repository if not exists
+        run: |
+          gcloud artifacts repositories create update-embeddings-repo \
+            --repository-format=docker \
+            --location=$REGION \
+            --description="Docker repository for update-embeddings" || true
+
       - name: Build Docker Image
         run: |
           docker build -t $IMAGE_NAME:$GITHUB_SHA -f Dockerfile .
