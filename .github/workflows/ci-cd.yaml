@@ -22,21 +22,29 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-      
+
       - name: Run Tests
         run: |
           pip install -r app/requirements.txt
           python -m unittest discover -s app/tests
 
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+          scopes: |
+            https://www.googleapis.com/auth/cloud-platform
+            https://www.googleapis.com/auth/cloud-build-service
+            https://www.googleapis.com/auth/devstorage.read_write
+
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
         with:
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
           project_id: ${{ secrets.GCP_PROJECT_ID }}
 
-      - name: Configure Docker for Google Artifact Registry
+      - name: Configure Docker to use gcloud as a credential helper
         run: |
-          gcloud auth configure-docker $REGION-docker.pkg.dev
+          gcloud auth configure-docker --quiet
 
       - name: Create Artifact Registry Repository if not exists
         run: |
@@ -63,6 +71,7 @@ jobs:
             --service-account ${{ secrets.CLOUD_RUN_SA_EMAIL }} \
             --set-secrets "OPENAI_API_KEY=projects/${{ secrets.GCP_PROJECT_ID }}/secrets/OPENAI_API_KEY:latest" \
             --quiet
+
   terraform:
     runs-on: ubuntu-latest
 
