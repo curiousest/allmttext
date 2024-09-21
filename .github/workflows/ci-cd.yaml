@@ -20,10 +20,6 @@ jobs:
     if: github.ref == 'refs/heads/main'
 
     steps:
-      - name: Install gcloud beta components
-        run: |
-          gcloud components install beta --quiet
-          
       - name: Checkout Code
         uses: actions/checkout@v3
 
@@ -41,6 +37,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
+          install_components: beta
 
       - name: Configure Docker to use gcloud as a credential helper
         run: |
