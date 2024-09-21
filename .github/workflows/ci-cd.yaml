@@ -13,6 +13,7 @@ env:
   SERVICE_NAME: update-embeddings
   REPOSITORY_NAME: update-embeddings-repo
   IMAGE_NAME: us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/update-embeddings-repo/update-embeddings
+  CLOUD_RUN_SA_EMAIL: ${{ secrets.CLOUD_RUN_SA_EMAIL }} 
 
 jobs:
   build-and-deploy:
