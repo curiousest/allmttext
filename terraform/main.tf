@@ -72,6 +72,7 @@ resource "google_cloud_run_v2_job" "job" {
       execution_environment  = "EXECUTION_ENVIRONMENT_GEN2"
     }
   }
+  deletion_protection = false
 }
 
 resource "google_cloud_scheduler_job" "scheduler_job" {
