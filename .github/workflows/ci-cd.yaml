@@ -100,5 +100,13 @@ jobs:
           TF_VAR_openai_api_key: ${{ secrets.OPENAI_API_KEY }}
           TF_VAR_pinecone_api_key: ${{ secrets.PINECONE_API_KEY }}
           TF_VAR_cloud_run_sa_email: ${{ secrets.CLOUD_RUN_SA_EMAIL }}
+          TF_VAR_gcs_bucket_name: allmytext-data
           TF_LOG: DEBUG
+      
+      - name: Handle Locking Errors
+        if: failure() && contains(steps.apply.outputs.stderr, 'Error acquiring the state lock')
+        run: |
+          LOCK_ID=$(terraform show -json | jq -r '.values.root_module.resources[].values.id')
+          terraform force-unlock $LOCK_ID
+          terraform apply -auto-approve
 
