@@ -72,7 +72,7 @@ resource "google_cloud_run_v2_job" "job" {
       execution_environment  = "EXECUTION_ENVIRONMENT_GEN2"
     }
   }
-  deletion_protection = false
+  deletion_protection = true
 }
 
 resource "google_cloud_scheduler_job" "scheduler_job" {
@@ -95,7 +95,6 @@ resource "google_cloud_scheduler_job" "scheduler_job" {
       "Content-Type" = "application/json"
     }
   }
-  deletion_protection = false
 }
 
 resource "google_project_iam_member" "cloud_run_sa_secretmanager_secret_accessor" {
