@@ -95,6 +95,7 @@ resource "google_cloud_scheduler_job" "scheduler_job" {
       "Content-Type" = "application/json"
     }
   }
+  deletion_protection = false
 }
 
 resource "google_project_iam_member" "cloud_run_sa_secretmanager_secret_accessor" {
