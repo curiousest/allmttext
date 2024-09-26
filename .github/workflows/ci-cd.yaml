@@ -106,10 +106,12 @@ jobs:
           TF_VAR_service_name: update-embeddings
           TF_VAR_pinecone_environment: default
           TF_VAR_pinecone_index_name: allmytext
+          TF_VAR_pinecone_api_key_secret: PINECONE_API_KEY
+          TF_VAR_openai_api_key_secret: OPENAI_API_KEY
           TF_LOG: DEBUG
       
       - name: Handle Locking Errors
-        if: failure() && contains(steps.apply.outputs.stderr, 'Error acquiring the state lock')
+        if: (failure() || cancelled()) && contains(steps.apply.outputs.stderr, 'Error acquiring the state lock')
         run: |
           LOCK_ID=$(terraform show -json | jq -r '.values.root_module.resources[].values.id')
           terraform force-unlock $LOCK_ID
