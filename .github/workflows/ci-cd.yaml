@@ -101,6 +101,11 @@ jobs:
           TF_VAR_pinecone_api_key: ${{ secrets.PINECONE_API_KEY }}
           TF_VAR_cloud_run_sa_email: ${{ secrets.CLOUD_RUN_SA_EMAIL }}
           TF_VAR_gcs_bucket_name: allmytext-data
+          TF_VAR_image_name: us-central1-docker.pkg.dev/allmytext/update-embeddings-repo/update-embeddings
+          TF_VAR_region: us-central1
+          TF_VAR_service_name: update-embeddings
+          TF_VAR_pinecone_environment: default
+          TF_VAR_pinecone_index_name: allmytext
           TF_LOG: DEBUG
       
       - name: Handle Locking Errors
