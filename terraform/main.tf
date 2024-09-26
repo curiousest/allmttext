@@ -107,22 +107,6 @@ resource "google_service_account" "scheduler_sa" {
   display_name = "Cloud Scheduler Service Account"
 }
 
-# Assign the necessary roles to the service account
-#resource "google_project_iam_member" "scheduler_sa_run_executor" {
-#  project = var.project_id
-#  role    = "roles/run.executor"
-#  member  = "serviceAccount:${google_service_account.scheduler_sa.email}"
-#}
-
-#resource "google_cloud_run_job_iam_member" "scheduler_sa_run_executor" {
-#  project = var.project_id
-#  location = var.region
-#  job = google_cloud_run_v2_job.job.name
-#  role = "roles/run.executor"
-#  member = "serviceAccount:${google_service_account.scheduler_sa.email}"
-#}
-
-
 resource "google_project_iam_member" "scheduler_sa_scheduler_agent" {
   project = var.project_id
   role    = "roles/cloudscheduler.serviceAgent"
@@ -154,11 +138,17 @@ resource "google_secret_manager_secret" "openai_api_key" {
   replication {
     auto {}
   }
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "google_secret_manager_secret_version" "openai_api_key_version" {
   secret      = google_secret_manager_secret.openai_api_key.id
   secret_data = var.openai_api_key
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "google_secret_manager_secret" "pinecone_api_key" {
@@ -167,10 +157,16 @@ resource "google_secret_manager_secret" "pinecone_api_key" {
   replication {
     auto {}
   }
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "google_secret_manager_secret_version" "pinecone_api_key_version" {
   secret      = google_secret_manager_secret.pinecone_api_key.id
   secret_data = var.pinecone_api_key
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
