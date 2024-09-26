@@ -157,11 +157,8 @@ resource "google_secret_manager_secret" "openai_api_key" {
 }
 
 resource "google_secret_manager_secret_version" "openai_api_key_version" {
-  secret = google_secret_manager_secret.openai_api_key.id
-
-  payload {
-    data = var.openai_api_key
-  }
+  secret      = google_secret_manager_secret.openai_api_key.id
+  secret_data = var.openai_api_key
 }
 
 resource "google_secret_manager_secret" "pinecone_api_key" {
@@ -173,10 +170,7 @@ resource "google_secret_manager_secret" "pinecone_api_key" {
 }
 
 resource "google_secret_manager_secret_version" "pinecone_api_key_version" {
-  secret = google_secret_manager_secret.pinecone_api_key.id
-
-  payload {
-    data = var.pinecone_api_key
-  }
+  secret      = google_secret_manager_secret.pinecone_api_key.id
+  secret_data = var.pinecone_api_key
 }
 
