@@ -99,4 +99,6 @@ jobs:
           TF_VAR_project_id: ${{ secrets.GCP_PROJECT_ID }}
           TF_VAR_openai_api_key: ${{ secrets.OPENAI_API_KEY }}
           TF_VAR_pinecone_api_key: ${{ secrets.PINECONE_API_KEY }}
+          TF_VAR_cloud_run_sa_email: ${{ secrets.CLOUD_RUN_SA_EMAIL }}
+          TF_LOG: DEBUG
 
